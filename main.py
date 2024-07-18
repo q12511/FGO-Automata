@@ -20,7 +20,9 @@ def main(args):
   shiki.quick_start()
 
   if party == "Buster":
-    exec("./profile/Buster.txt")
+    with open("./profile/Buster.txt", 'r') as file:
+      code = file.read()
+    exec(code)
 
   elif party == '0': #art
     # battle 1
