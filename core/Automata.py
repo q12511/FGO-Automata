@@ -96,6 +96,7 @@ class Automata():
         """
         while not util.standby(util.get_sh(self.shifts), crds.IMAGE["attack"]):
             time.sleep(0.2)
+        time.sleep(1.0)
         self.tap(crds.SERVANT_SKILLS[skill-1], 5, 5)
         time.sleep(1)
         if tar != 0:
@@ -148,7 +149,7 @@ class Automata():
         """
         while not util.standby(util.get_sh(self.shifts), crds.IMAGE["select"]):
             time.sleep(0.2)
-        self.tap(crds.TARGETS[servant-1], 100, 100)
+        self.tap(crds.TARGETS[servant-1], 50, 50)
 
     def change_servant(self, org: int, tar: int):
         """ Change Servant
@@ -269,7 +270,7 @@ class Automata():
             Exception("Desired support not found!")
         Raises when reached maxium update times.
         """
-        time.sleep(0.3)
+        time.sleep(1.2)
         if spt is None:
             spt = self.support
         x = util.get_crd(util.get_sh(self.shifts), spt)
@@ -424,6 +425,10 @@ class Automata():
 
     def eat_apple(self):
         path = f"assets/{self.apple}.png"
+        """ Add blue apple """
+        while not util.standby(util.get_sh(self.shifts), path):
+            time.sleep(0.2)
+            self.swipe((1000, 800), (1000, 200), 0.5 + 0.1 * random.randrange(1, 10))
         x = util.get_crd(util.get_sh(self.shifts), path)
         self.tap(x[0])
         self.counts -= 1

@@ -9,8 +9,8 @@ import subprocess
 import os
 
 # ADB related #note 先開啟adb以免載import時imco
-os.system('adb kill-server')
-os.system('adb start-server')
+# os.system('adb kill-server')
+# os.system('adb start-server')
 
 
 def tap(crd: (int, int)):
@@ -18,6 +18,7 @@ def tap(crd: (int, int)):
         x=crd[0],
         y=crd[1]
     )
+    print("tap {x} {y}".format(x=crd[0], y=crd[1]))
     logging.info(cmdTap)
     os.system(cmdTap)
 
@@ -55,7 +56,9 @@ def split(path: str, edge: (int, int)):
 def get_sh(edge: (int, int)):
     # screenshot()
     #split(img, edge)
-    img = screencap()
+    while True:
+        img = screencap()
+        if type(img) != type(None): break
     PIL_img = Image.fromarray(img)
     out = PIL_img.crop((edge[0], edge[1], edge[0]+1920, edge[1]+1080))
     out_array = np.array(out)
@@ -65,7 +68,8 @@ def get_sh(edge: (int, int)):
 def screencap():
     pipe = subprocess.Popen("adb shell screencap -p",
                             stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
-    # 基於bluestacks android7,如果用的是android5版的bluestacks的話要改成image_bytes = pipe.stdout.read().replace(b'\r\r\n', b'\n')
+    # 基於bluestacks android7,如果用的是android5版的bluestacks的話要改成
+    # image_bytes = pipe.stdout.read().replace(b'\r\r\n', b'\n')
     image_bytes = pipe.stdout.read().replace(b'\r\n', b'\n')
     image = cv2.imdecode(np.frombuffer(
         image_bytes, dtype='uint8'), cv2.IMREAD_COLOR)
@@ -80,6 +84,7 @@ def standby(images=get_sh((0, 0)), tmp: str = None, threshold: float = 0.85) -> 
     template = cv2.imread(tmp)
     res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
     res = cv2.minMaxLoc(res)  # note改取得最相似之座標 res[0]為最小相似度的座標,res[1]為最大相似度的座標
+    print(res)
     if (res[1] >= threshold):
         return True
     return False
@@ -97,11 +102,13 @@ def check_color(sh: str, tmp: str, threshold: float = 0.8) -> bool:
 def get_crd(imges, tmp: str, threshold: float = 0.85) -> [(int, int)]:
     img = imges
     template = cv2.imread(tmp)
+    # Scv2.waitKey(1)
     res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
     pos = []
     loc = np.where(res >= threshold)
     for pt in zip(*loc[::-1]):
         pos.append(pt)
+    print(pos)
     return pos
 
 
