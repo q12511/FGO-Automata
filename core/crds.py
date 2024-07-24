@@ -67,8 +67,8 @@ TARGETS = [
 
 # Kukulkan skill support
 KUKULN = [
-    (),
-    ()
+    (760, 600),
+    (1250, 600)
 ]
 
 # path to images
