@@ -147,9 +147,9 @@ class Automata():
         self.tap(crds.SERVANT_SKILLS[skill-1], 5, 5)
         time.sleep(0.5)
         if star == True:
-            self.tap(crds.KUKULN[0], 5, 5)
-        else:
             self.tap(crds.KUKULN[1], 5, 5)
+        else:
+            self.tap(crds.KUKULN[0], 5, 5)
 
         time.sleep(1)
         if tar != 0:
