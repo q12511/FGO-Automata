@@ -65,6 +65,12 @@ TARGETS = [
     (1440, 680)
 ]
 
+# Kukulkan skill support
+KUKULN = [
+    (760, 600),
+    (1250, 600)
+]
+
 # path to images
 # change the path if you're play FGO other than the CN version
 # JP version: "assets/jp/"

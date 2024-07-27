@@ -139,6 +139,24 @@ class Automata():
         for skill in skills:
             self.select_servant_skill(skill[0], skill[1])
 
+    def select_kukulkan_skill(self, skill: int, tar: int = 0, star=False, extend=False):
+        """ kukulkan skill"""
+        while not util.standby(util.get_sh(self.shifts), crds.IMAGE["attack"]):
+            time.sleep(0.2)
+        time.sleep(1.0)
+        self.tap(crds.SERVANT_SKILLS[skill-1], 5, 5)
+        time.sleep(0.5)
+        if star == True:
+            self.tap(crds.KUKULN[1], 5, 5)
+        else:
+            self.tap(crds.KUKULN[0], 5, 5)
+
+        time.sleep(1)
+        if tar != 0:
+            self.select_servant(tar)
+        if extend:
+            time.sleep(1)
+    
     def select_servant(self, servant: int):
         """ Select Servant
 
