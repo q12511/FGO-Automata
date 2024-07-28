@@ -51,12 +51,12 @@ def main(args):
     # finish
     shiki.finish_battle()
 
-  elif party == '1': # buster gil
+  elif party == '1': # buster
     # battle 1
     # shiki.get_current_battle()
     shiki.select_servant_skill(1)
     shiki.select_servant_skill(2)
-    shiki.select_servant_skill(3)
+    # shiki.select_servant_skill(3)
     shiki.select_servant_skill(5,1)
     shiki.select_servant_skill(6,1)
     shiki.select_servant_skill(8,1)
@@ -64,18 +64,18 @@ def main(args):
     shiki.select_cards([6])
     # battle 2
     #shiki.select_master_skill(1)
-    shiki.select_servant_skill(1)
     shiki.select_servant_skill(4,1)
     shiki.select_servant_skill(7,1)
+    shiki.select_servant_skill(1)
     shiki.select_cards([6])
     # battle 3
     shiki.select_servant_skill(2)
-    shiki.select_servant_skill(3)
-    # shiki.select_master_skill(1)
+    # shiki.select_servant_skill(3)
+    shiki.select_master_skill(1)
     shiki.select_master_skill(3, 2, 1)
     shiki.select_servant_skill(4)
     shiki.select_servant_skill(5,1)
-    # shiki.select_servant_skill(6,1)
+    shiki.select_servant_skill(6,1)
     shiki.select_cards([6])
     # finish
     shiki.finish_battle()
@@ -108,6 +108,8 @@ def main(args):
     # finish
     shiki.finish_battle()
 
+  elif party == '3':
+    shiki.select_kukulkan_skill(1)
   else:
     print("party error")
 
